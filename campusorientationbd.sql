@@ -77,7 +77,7 @@ create table backupclass(
 create or replace function BackupPerson() returns trigger as $$
 begin
 	insert into backupperson values (old.id, old.ra, old.name, old.password, current_timestamp, current_user);
-return new;
+return old;
 end; $$ LANGUAGE plpgsql;
 
 
@@ -90,7 +90,7 @@ create or replace function BackupClass() returns trigger as $$
 begin
 	insert into backupclass values (old.idcourse, old.datetimestart, old.datetimeend, old.classroom, old.description
 								   , current_timestamp, current_user);
-return new;
+return old;
 end; $$ LANGUAGE plpgsql;
 
 
